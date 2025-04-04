@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signup } from "../api/auth"; // Import the signup function
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -10,16 +11,27 @@ export default function Signup() {
     password: "",
     bio: "",
   });
-
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted", formData);
-    // Handle signup logic here
+    try {
+      const response = await signup(formData);
+      console.log("Signup success:", response);
+
+      // Optionally, store the token or user data if provided
+      localStorage.setItem("userToken", response.token);
+
+      // Redirect to the dashboard or login page after successful signup
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -34,7 +46,6 @@ export default function Signup() {
             value={formData.email}
             onChange={handleChange}
             className="w-full px-4 py-2 border-1 rounded bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
-
             required
           />
           <input
@@ -44,7 +55,6 @@ export default function Signup() {
             value={formData.first_name}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
-
             required
           />
           <input
@@ -54,7 +64,6 @@ export default function Signup() {
             value={formData.last_name}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
-
             required
           />
           <input
@@ -64,7 +73,6 @@ export default function Signup() {
             value={formData.username}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
-
             required
           />
           <input
@@ -74,7 +82,6 @@ export default function Signup() {
             value={formData.password}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
-
             required
           />
           <textarea
@@ -83,7 +90,6 @@ export default function Signup() {
             value={formData.bio}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-400"
-
             required
           ></textarea>
           <button
@@ -93,6 +99,9 @@ export default function Signup() {
             Sign Up
           </button>
         </form>
+
+        {error && <div className="text-red-500 mt-4">{error}</div>}
+
         <p className="mt-4 text-sm text-white">
           Already have an account? 
           <button
