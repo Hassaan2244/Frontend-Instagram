@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth"; // Import the login function
+import Main from "./HomePage";
+
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -17,7 +19,7 @@ const Login = () => {
       const response = await login(form);
       console.log("Login success:", response);
       localStorage.setItem("userToken", response.token);
-      navigate("/dashboard");
+      navigate("/Main");
     } catch (err) {
       setError(err.message);
     }
