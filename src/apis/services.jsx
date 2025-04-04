@@ -1,20 +1,19 @@
-import axios from 'axios';
+const BASE_URL = "http://127.0.0.1:8000";
 
-const API = axios.create({
-  baseURL: 'http://127.0.0.1:3001/', // update with your backend URL
-});
+const getAuthToken = () => {
+  return localStorage.getItem("userToken");
+};
 
-
-API.interceptors.request.use((config) => {
-  if (!localStorage.getItem('token')) {
-    localStorage.setItem('token', '9f13cee78ab44db2250bef58dff0d7c12bea12d2');
+const getHeaders = () => {
+  const token = getAuthToken();
+  if (!token) {
+    throw new Error("User is not authenticated");
   }
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Token ${token}`;
-  }
-  return config;
-});
 
+  return {
+    Authorization: `Token ${token}`,
+    "Content-Type": "application/json",
+  };
+};
 
-export default API;
+export { BASE_URL, getAuthToken, getHeaders };
