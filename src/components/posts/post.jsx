@@ -16,15 +16,11 @@ const Post = ({ image, title, description }) => {
         </div>
       )}
 
-      {/* Post Content */}
       <div className="p-5">
-        {/* Title */}
         <h2 className="text-2xl font-semibold mb-2 tracking-tight">{title}</h2>
 
-        {/* Description */}
         <p className="text-zinc-400 mb-4 leading-relaxed">{description}</p>
 
-        {/* Actions */}
         <div className="flex gap-6">
           <button className="flex items-center gap-2 text-red-500 hover:text-red-600 transition">
             <FaHeart size={20} />

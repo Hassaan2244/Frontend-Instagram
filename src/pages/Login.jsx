@@ -19,6 +19,8 @@ const Login = () => {
       const response = await login(form);
       console.log("Login success:", response);
       localStorage.setItem("userToken", response.token);
+      localStorage.setItem("user_id", response.user_id);
+      
       navigate("/Main");
     } catch (err) {
       setError(err.message);
