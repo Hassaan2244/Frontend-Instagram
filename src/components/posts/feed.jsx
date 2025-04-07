@@ -33,7 +33,10 @@ const Feed = () => {
         posts.map((post) => (
           <Post 
             key={post.id} 
-            image={post.image ? `http://127.0.0.1:8000${post.image}` : "https://via.placeholder.com/500"}
+            image={`http://127.0.0.1:8000${post.image}`}
+            title={post.title}
+            description={post.description}
+
           />
         ))
       )}
