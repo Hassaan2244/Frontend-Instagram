@@ -28,6 +28,7 @@ export default function Signup() {
       localStorage.setItem("userToken", response.token);
 
       // Redirect to the dashboard or login page after successful signup
+      
       navigate("/dashboard");
     } catch (err) {
       setError(err.message);

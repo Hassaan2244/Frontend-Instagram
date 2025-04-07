@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createPost } from "../../api/postService";
+import { createPost } from "../../hooks/postService";
 
 const CreatePostModal = ({ isOpen, onClose }) => {
   const [image, setImage] = useState(null);
