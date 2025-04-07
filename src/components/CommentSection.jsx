@@ -24,7 +24,7 @@ const CommentSection = ({ postId }) => {
         comments.map((comment) => (
           <div key={comment.id} className="border-b pb-2 mb-2">
             <p className="text-sm">
-              <strong>{profile?.first_name || "Unknown User"}</strong>: {comment.comment_text}
+              <strong>{comment.author_name || "Unknown User"}</strong>: {comment.comment_text}
             </p>
           </div>
         ))
