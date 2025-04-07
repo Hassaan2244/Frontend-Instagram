@@ -1,4 +1,4 @@
-import { BASE_URL} from "../apis/services";
+import { BASE_URL} from "../apis/service";
 import { useState } from "react";
 
 const useFollowUser = () => {

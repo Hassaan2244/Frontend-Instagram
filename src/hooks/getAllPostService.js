@@ -1,4 +1,4 @@
-import { BASE_URL, getHeaders } from "../apis/services";
+import { BASE_URL, getHeaders } from "../apis/service";
 
 export const fetchPosts = async () => {
   try {

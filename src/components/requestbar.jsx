@@ -2,10 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { getUsers } from "../hooks/getAllUsers";
 import useFollowUser from "../hooks/userFollowUser"
+import userProfile from "../hooks/userProfile";
 
 const Suggestions = () => {
   const [users, setUsers] = useState([]);
   const { toggleFollow, loading, error } = useFollowUser();
+  const {profile} = userProfile();
+
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -48,8 +51,9 @@ const Suggestions = () => {
             className="w-12 h-12 rounded-full"
           />
           <div>
-            <p className="font-bold">zaha_rehman10</p>
-            <p className="text-gray-400 text-sm">Zaha Rehman</p>
+          <p className="font-bold">{profile?.first_name} {profile?.last_name}</p>
+
+           
           </div>
         </div>
         <button className="text-blue-500 text-sm font-semibold">Switch</button>

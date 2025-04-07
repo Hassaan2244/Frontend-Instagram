@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/post/create/";
+const API_URL = "http://127.0.0.1:3001/post/create/";
 
 export const createPost = async (title, description, imageFile) => {
   const token = localStorage.getItem("userToken");
