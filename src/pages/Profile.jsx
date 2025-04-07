@@ -1,12 +1,10 @@
 import React from "react";
 import userProfile from "../hooks/userProfile";
-import Posts from "../components/Posts";
-import Like from "../components/LikeButton"
 
 // Helper function to get the first letter of the username
-const getInitials = (first_name) => {
-  if (!first_name) return "";
-  return first_name.charAt(0).toUpperCase();
+const getInitials = (username) => {
+  if (!username) return "";
+  return username.charAt(0).toUpperCase();
 };
 
 const Profile = () => {
@@ -59,9 +57,25 @@ const Profile = () => {
       {/* Divider */}
       <hr className="w-full max-w-3xl my-6 border-t border-gray-300" />
 
-      <Posts/>
-
-      
+      {/* Posts grid/list */}
+      <div className="w-full max-w-3xl">
+        <h2 className="text-xl font-semibold mb-4">Posts</h2>
+        {profile.posts && profile.posts.length > 0 ? (
+          <div className="grid grid-cols-3 gap-4">
+            {profile.posts.map((post) => (
+              <div
+                key={post.id}
+                className="border border-gray-200 p-4 flex flex-col items-start"
+              >
+                <h3 className="font-semibold">{post.title}</h3>
+                <p className="text-sm text-gray-700 mt-1">{post.description}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No posts available.</p>
+        )}
+      </div>
     </div>
   );
 };
@@ -109,4 +123,4 @@ export default Profile;
 //     );
 // }
 
-// export default Profiled
+// export default Profile
