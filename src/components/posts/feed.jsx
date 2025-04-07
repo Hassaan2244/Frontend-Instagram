@@ -31,11 +31,16 @@ const Feed = () => {
         <p className="text-center text-gray-400">No posts available</p>
       ) : (
         posts.map((post) => (
+        
+    
           <Post 
-            key={post.id} 
-            image={post.image ? `http://127.0.0.1:3001${post.image}` : "https://via.placeholder.com/500"}
+          key={post.id} 
+          id={post.id} 
+          image={post.image ? `http://127.0.0.1:3001${post.image}` : "https://via.placeholder.com/500"}
+          title={post.title}
+          description={post.description}
+        />
             
-          />
         ))
       )}
     </div>
