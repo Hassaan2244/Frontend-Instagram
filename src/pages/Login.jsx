@@ -2,29 +2,25 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth"; // Import the login function
 import Main from "./HomePage";
-
-
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState(""); // To handle any error messages
   const navigate = useNavigate();
-
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await login(form);
       console.log("Login success:", response);
-      localStorage.setItem("userToken", response.token);
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("user_id", response.user_id);
       navigate("/Main");
     } catch (err) {
       setError(err.message);
     }
   };
-
   return (
     <div className="flex justify-center items-center min-h-screen bg-black">
       <div className="w-96 p-8 border-1 border-gray-500 rounded-xl">
@@ -55,13 +51,10 @@ const Login = () => {
             Log In
           </button>
         </form>
-
         {error && <div className="text-red-500 mt-4">{error}</div>}
-
         <div className="text-center mt-4 text-sm text-gray-600">
           <a href="#" className="text-blue-500 hover:underline">Forgot password?</a>
         </div>
-
         <div className="text-center mt-6 text-sm text-white">
           Don't have an account?
           <button
@@ -75,5 +68,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
